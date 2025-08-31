@@ -49,7 +49,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run migrations
       run: |
-        python manage.py migrate --noinput
+        python parkingapp/manage.py migrate --noinput
     - name: Run Tests
       run: |
-        python manage.py test
+        python parkingapp/manage.py test
