@@ -5,8 +5,6 @@ from django.db import transaction
 from ..models import UserFace
 import requests
 
-ngrok_url = "https://dd625aa96066.ngrok-free.app/"
-url_math_embedding = ngrok_url + "math_embedding"
 
 app = FaceAnalysis(name="buffalo_l")  # bộ model đã train gồm detector face và recognizer face
 app.prepare(ctx_id=0, det_size=(640, 640))
