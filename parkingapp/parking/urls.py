@@ -4,9 +4,9 @@ from . import views
 
 router = DefaultRouter()
 
-router.register('users', views.UserViewSet, basename='user')
+router.register('users', views.UserViewSet, basename='users')
 router.register('vehicles', views.VehicleViewSet, basename='vehicle')
-router.register('fee-role', views.FeeRoleViewSet, basename='fee-role')
+router.register('fee-rule', views.FeeRoleViewSet, basename='fee-rule')
 router.register('payments', views.PaymentViewSet, basename='payment')
 router.register('parking-logs', views.ParkingLogViewSet, basename='parking-log')
 router.register('stats', views.StatsViewSet, basename='stats')
