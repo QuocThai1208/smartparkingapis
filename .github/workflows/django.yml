@@ -49,7 +49,9 @@ jobs:
         pip install -r requirements.txt
     - name: Run migrations
       run: |
-        python parkingapp/manage.py migrate --noinput
+        cd parkingapp
+        python manage.py migrate --noinput
     - name: Run Tests
       run: |
-        python parkingapp/manage.py test
+        cd parkingapp
+        python manage.py test
