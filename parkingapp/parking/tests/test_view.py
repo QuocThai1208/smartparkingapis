@@ -19,13 +19,13 @@ class UserViewSetTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)  # auto login
 
     def test_get_current_user(self):
-        url = reverse("user-current-user")
+        url = reverse("users-current-user")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["username"], self.user.username)
 
     def test_patch_current_user(self):
-        url = reverse("user-current-user")
+        url = reverse("users-current-user")
         data = {"full_name": "Updated Name", "address": "HCM"}
         response = self.client.patch(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -34,33 +34,33 @@ class UserViewSetTestCase(APITestCase):
         self.assertEqual(self.user.address, "HCM")
 
     def test_patch_current_user_invalid_birth(self):
-        url = reverse("user-current-user")
+        url = reverse("users-current-user")
         data = {"birth": "invalid"}  # không phải số
         response = self.client.patch(url, data)
         self.assertEqual(response.status_code, 400)
         self.assertIn("birth", response.data)
 
     def test_get_total_payment(self):
-        url = reverse("user-get-total-payment")
+        url = reverse("users-get-total-payment")
         response = self.client.get(url, {"day": "1", "month": "1", "year": "2025"})
         self.assertEqual(response.status_code, 200)
         self.assertIn("TotalPayment", response.data)
 
     def test_get_wallet(self):
-        url = reverse("user-get-wallet")
+        url = reverse("users-get-wallet")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertIn("balance", response.data)
 
     def test_wallet_deposit(self):
-        url = reverse("user-wallet-deposit")
+        url = reverse("users-wallet-deposit")
         data = {"amount": 1000, "description": "Nạp tiền test"}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["message"], "Nạp tiền thành công")
 
     def test_wallet_withdraw(self):
-        url = reverse("user-wallet-withdraw")
+        url = reverse("users-wallet-withdraw")
         data = {"amount": 500, "description": "Rút tiền test"}
         response = self.client.post(url, data)
         # tuỳ thuộc vào logic trong wallet, có thể lỗi nếu số dư không đủ
