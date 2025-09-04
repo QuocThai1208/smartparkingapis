@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-j_c$dizhv-3v5(2a3-jjx5n3%pi#fprrzwqrgai8h6y&snll#$
 DEBUG = True
 
 # b144393b5cd5
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'fair-drum-smooth.ngrok-free.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', 'fair-drum-smooth.ngrok-free.app', ".a.run.app", "*"]
 AUTH_USER_MODEL = 'parking.User'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'parking/media')
