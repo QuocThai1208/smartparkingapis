@@ -1,24 +1,11 @@
 steps:
-  # Build Docker image
+  # Bước build Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/388881301098/parkingapp:$SHORT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/secure-pottery-471016-c9/django-app', '.']
 
-  # Push image lên Google Container Registry
+  # Bước push image lên Container Registry (hoặc Artifact Registry nếu bạn dùng)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/388881301098/parkingapp:$SHORT_SHA']
+    args: ['push', 'gcr.io/secure-pottery-471016-c9/django-app']
 
-  # Deploy lên Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      [
-        'run', 'deploy', 'parkingapp',
-        '--image', 'gcr.io/388881301098/parkingapp:$SHORT_SHA',
-        '--region', 'asia-southeast1',
-        '--platform', 'managed',
-        '--allow-unauthenticated',
-        '--port', '8000',
-        '--set-env-vars', 'DB_HOST=<CLOUDSQL_HOST>,DB_USER=<USER>,DB_PASSWORD=<PASSWORD>,DB_NAME=<DB>'
-      ]
 images:
-  - 'gcr.io/388881301098/parkingapp:$SHORT_SHA'
+  - 'gcr.io/secure-pottery-471016-c9/django-app'
