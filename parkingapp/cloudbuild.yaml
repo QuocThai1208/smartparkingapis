@@ -1,0 +1,24 @@
+steps:
+  # Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/388881301098/parkingapp:$SHORT_SHA', '.']
+
+  # Push image lên Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/388881301098/parkingapp:$SHORT_SHA']
+
+  # Deploy lên Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'run', 'deploy', 'parkingapp',
+        '--image', 'gcr.io/388881301098/parkingapp:$SHORT_SHA',
+        '--region', 'asia-southeast1',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--port', '8000',
+        '--set-env-vars', 'DB_HOST=<CLOUDSQL_HOST>,DB_USER=<USER>,DB_PASSWORD=<PASSWORD>,DB_NAME=<DB>'
+      ]
+images:
+  - 'gcr.io/388881301098/parkingapp:$SHORT_SHA'

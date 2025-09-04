@@ -111,10 +111,10 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', ''),
-        'USER': os.getenv('DB_USER', ''),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),  # local
+        'NAME': 'parkingdb',
+        'USER': os.getenv('DB_USER', 'django_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Admin@123'),
+        'HOST': '/cloudsql/secure-pottery-471016-c9:asia-southeast1:parkingdb',  # local
         'PORT': os.getenv('DB_PORT', ''),
     }
 }
