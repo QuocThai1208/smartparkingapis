@@ -86,4 +86,6 @@ jobs:
             --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/django-app \
             --region asia-southeast1 \
             --platform managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --memory 2Gi \
+            --cpu 2
