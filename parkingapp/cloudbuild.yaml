@@ -1,9 +1,7 @@
 steps:
-  # Bước build Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/secure-pottery-471016-c9/django-app', '.']
+    args: ['build', '-t', 'gcr.io/secure-pottery-471016-c9/django-app', './parkingapp']
 
-  # Bước push image lên Container Registry (hoặc Artifact Registry nếu bạn dùng)
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/secure-pottery-471016-c9/django-app']
 
