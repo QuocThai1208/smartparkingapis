@@ -79,7 +79,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Build and Push Docker image
-        run: gcloud builds submit ./parkingapp --tag gcr.io/${{ secrets.PROJECT_ID }}/django-app --no-stream-logs
+        run: gcloud builds submit ./parkingapp --tag gcr.io/${{ secrets.PROJECT_ID }}/django-app --suppress-logs
 
       - name: Deploy to Cloud Run
         run: |
