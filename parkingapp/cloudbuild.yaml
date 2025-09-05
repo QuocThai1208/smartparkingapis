@@ -30,7 +30,9 @@ steps:
       - execute
       - django-migrate
       - --region=asia-southeast1
-      - --command="python parkingapp/manage.py migrate --noinput"
+      - --set-env-vars=DB_USER=django_user,DB_PASSWORD=Admin@123,DB_NAME=parkingdb
+      - --add-cloudsql-instances=secure-pottery-471016-c9:asia-southeast1:parkingdb
+      - --args=python,manage.py,migrate,--noinput
 
 images:
   - 'gcr.io/secure-pottery-471016-c9/django-app'

@@ -108,27 +108,17 @@ import pymysql
 
 pymysql.install_as_MySQLdb()
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.getenv('DB_NAME', ''),
-#         'USER': os.getenv('DB_USER', ''),
-#         'PASSWORD': os.getenv('DB_PASSWORD', ''),
-#         'HOST': os.getenv('DB_HOST', ''),  # local
-#         'PORT': os.getenv('DB_PORT', ''),
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'parkingdb',
-        'USER': 'django_user',
-        'PASSWORD': 'Admin@123',
-        'HOST': '/cloudsql/secure-pottery-471016-c9:asia-southeast1:parkingdb',  # local
+        'NAME': os.getenv('DB_NAME', ''),
+        'USER': os.getenv('DB_USER', ''),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),  # local
         'PORT': '3306',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
