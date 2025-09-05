@@ -3,10 +3,34 @@ options:
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/secure-pottery-471016-c9/django-app', './parkingapp']
+    args: [ 'build', '-t', 'gcr.io/secure-pottery-471016-c9/django-app', './parkingapp' ]
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/secure-pottery-471016-c9/django-app']
+    args: [ 'push', 'gcr.io/secure-pottery-471016-c9/django-app' ]
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - django-app
+      - --image=gcr.io/secure-pottery-471016-c9/django-app
+      - --region=asia-southeast1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --memory=2Gi
+      - --cpu=2
+      - --update-env-vars=CLOUD_SQL_CONNECTION_NAME=secure-pottery-471016-c9:asia-southeast1:parkingapp
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - run
+      - jobs
+      - execute
+      - django-migrate
+      - --region=asia-southeast1
+      - --command="python parkingapp/manage.py migrate --noinput"
 
 images:
   - 'gcr.io/secure-pottery-471016-c9/django-app'
